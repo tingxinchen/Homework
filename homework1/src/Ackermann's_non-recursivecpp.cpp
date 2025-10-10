@@ -35,17 +35,17 @@ int Ack(int m, int n)
             //A(m-1, A(m, n-1))
             
             top++;
-            stack_m[top] = m - 1; // ¥~¼h¹Bºâ
-            stack_n[top] = -1;    // µ¥«İµ²ªG
+            stack_m[top] = m - 1; // å¤–å±¤é‹ç®—
+            stack_n[top] = -1;    // ç­‰å¾…çµæœ
             top++;
-            stack_m[top] = m;     // ¤º¼h
+            stack_m[top] = m;     // å…§å±¤
             stack_n[top] = n - 1;
         }
 
-        // ³B²zµ²ªG¡]-1 ªº¦a¤è¡^
+        // è™•ç†çµæœï¼ˆ-1 çš„åœ°æ–¹ï¼‰
         while (top >= 0 && stack_n[top] == -1)
         {
-            stack_n[top] = n; // ¥Î¤º¼hµ²ªG¨ú¥N
+            stack_n[top] = n; // ç”¨å…§å±¤çµæœå–ä»£
         }
     }
 
