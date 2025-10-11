@@ -16,13 +16,14 @@ jobs:
           sudo apt-get install -y clang-format-18
           sudo ln -sf /usr/bin/clang-format-18 /usr/bin/clang-format
 
-      - name: Run format check on src/
+      - name: Run format check on all cpp files
         run: |
           clang-format --version
           cd ${{ github.workspace }}
-          if [ -d "src" ]; then
-            find src -type f -name "*.cpp" -exec clang-format --dry-run --Werror {} +
+          cpp_files=$(find . -type f -name "*.cpp")
+          if [ -z "$cpp_files" ]; then
+           echo "No .cpp files found, skipping format check."
           else
-            echo "Error: 'src' directory not found in ${{ github.workspace }}"
-            exit 1
+            echo "$cpp_files" | xargs clang-format --dry-run --Werror
           fi
+
