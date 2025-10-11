@@ -144,9 +144,23 @@ int main()
 | 測試四   | (1, 1)              | 3               |3         |
 | 測試五   | (2, 2)              | 7               |7         |
 
+### 編譯與執行指令
+```cmd
+$ g++ -std=c++17 -o ackermann_rec src/Ackermann.cpp
+$ ./ackermann_rec
+Enter m and n: 1 2
+4
+$ g++ -std=c++17 -o ackermann_non_rec src/Ackermann^'s_non-recursivecpp.cpp
+$ ./ackermann_non_rec
+Enter m and n: 1 2
+4
+```
+### 結論
+1. 程式能正確計算在範圍內的正確ackermann函數。  
+2. 有遞迴和非遞迴版本。  
+3. 較大輸入值，遞迴版本可能因堆疊溢出失敗，非遞迴版本受限於固定大小。
 
-
-
-
-
+## 申論及開發報告
+1. 用遞迴寫ackermann函數較簡單快速，透過遞迴呼叫三種不同狀況的執行方式，在程式的結構上相當整齊，是快速的方法。
+2. 在非遞迴上，需要有地方來儲存還未計算的函數，所以需要用到堆疊，一開始我沒想到堆疊也不熟悉，只想到字串，但字串不太好用來處理，所以上網找了很多非遞迴的寫法
 
