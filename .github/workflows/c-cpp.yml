@@ -20,10 +20,20 @@ jobs:
         run: |
           clang-format --version
           cd ${{ github.workspace }}
+
+          # 搜尋所有 .cpp 檔案
           cpp_files=$(find . -type f -name "*.cpp")
+
           if [ -z "$cpp_files" ]; then
-           echo "No .cpp files found, skipping format check."
-          else
-            echo "$cpp_files" | xargs clang-format --dry-run --Werror
+            echo "No .cpp files found, skipping format check."
+            exit 0
           fi
 
+          echo "Checking format for the following files:"
+          echo "$cpp_files"
+
+          # 使用 -print0 + xargs -0 防止引號/空格問題
+          find . -type f -name "*.cpp" -print0 | xargs -0 clang-format --dry-run --Werror
+
+      - name: Complete job
+        run: echo "✅ C++ format check passed!"
