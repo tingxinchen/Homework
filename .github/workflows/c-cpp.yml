@@ -20,4 +20,9 @@ jobs:
         run: |
           clang-format --version
           cd ${{ github.workspace }}
-          find src -name "*.cpp" -exec clang-format --dry-run --Werror {} +
+          if [ -d "src" ]; then
+            find src -type f -name "*.cpp" -exec clang-format --dry-run --Werror {} +
+          else
+            echo "Error: 'src' directory not found in ${{ github.workspace }}"
+            exit 1
+          fi
