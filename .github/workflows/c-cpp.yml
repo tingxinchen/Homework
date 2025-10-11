@@ -1,0 +1,20 @@
+name: Check C++ Format
+
+on: [push, pull_request]
+
+jobs:
+  format-check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install clang-format
+        run: sudo apt-get install -y clang-format
+
+      - name: Run format check on src/
+        run: |
+          clang-format --version
+          # 檢查 src 資料夾內的所有 .cpp 與 .h 檔案
+          clang-format --dry-run --Werror $(find src -name "*.cpp" -o -name "*.h")
