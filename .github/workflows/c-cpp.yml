@@ -19,4 +19,5 @@ jobs:
       - name: Run format check on src/
         run: |
           clang-format --version
-          find src -name "*.cpp" -o -name "*.h" -exec clang-format --dry-run --Werror {} +
+          cd ${{ github.workspace }}
+          find src -name "*.cpp" -exec clang-format --dry-run --Werror {} +
