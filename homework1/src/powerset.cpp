@@ -22,7 +22,7 @@ void powerset(char S[], int n)
             }
         }
 
-        if (first) cout << " "; // ªÅ¶°¦X ( )
+        if (first) cout << " "; // ç©ºé›†åˆ ( )
         cout << ")";
 
         if (bit != total - 1) cout << ", ";
@@ -33,12 +33,13 @@ void powerset(char S[], int n)
 
 int main()
 {
-    char S[20]; // ³Ì¦h 20 ­Ó
-    cout << "¿é¤J¶°¦X¤¸¯À¡]¨Ò¦pÃD¥Øabc¡^: ";
+    char S[20]; // æœ€å¤š 20 å€‹
+    cout << "è¼¸å…¥é›†åˆå…ƒç´ ï¼ˆä¾‹å¦‚é¡Œç›®abcï¼‰: ";
     cin >> S;
 
-    int n = strlen(S); // ¿é¤Jªø«×
+    int n = strlen(S); // é•·åº¦
     powerset(S, n);
 
     return 0;
 }
+
