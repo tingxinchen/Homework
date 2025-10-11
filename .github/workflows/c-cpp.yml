@@ -10,11 +10,13 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Install clang-format
-        run: sudo apt-get install -y clang-format
+      - name: Install specific clang-format version
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y clang-format-18
+          sudo ln -sf /usr/bin/clang-format-18 /usr/bin/clang-format
 
       - name: Run format check on src/
         run: |
           clang-format --version
-          # 檢查 src 資料夾內的所有 .cpp 與 .h 檔案
-          clang-format --dry-run --Werror $(find src -name "*.cpp" -o -name "*.h")
+          find src -name "*.cpp" -o -name "*.h" -exec clang-format --dry-run --Werror {} +
