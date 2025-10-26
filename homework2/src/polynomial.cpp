@@ -1,41 +1,41 @@
 #include <iostream>
 using namespace std;
 
-class Polynomial; // «e¸m«Å§i
+class Polynomial; // å‰ç½®å®£å‘Š
 
 class Term {
     friend ostream& operator<<(ostream& os, const Polynomial& p);
     friend istream& operator>>(istream& is, Polynomial& p);
     friend class Polynomial;
 private:
-    float coef; // «Y¼Æ
-    int exp;    // «ü¼Æ
+    float coef; // ä¿‚æ•¸
+    int exp;    // æŒ‡æ•¸
 };
 
 class Polynomial {
     friend ostream& operator<<(ostream& os, const Polynomial& p);
     friend istream& operator>>(istream& is, Polynomial& p);
 private:
-    int capacity; // °}¦C®e¶q
+    int capacity; // é™£åˆ—å®¹é‡
 public:
-    int terms;    // ¹ê»Ú¶µ¼Æ
-    Term* termsArray; // ¦s©ñ Term ªº°}¦C
+    int terms;    // å¯¦éš›é …æ•¸
+    Term* termsArray; // å­˜æ”¾ Term çš„é™£åˆ—
 
-    Polynomial();                // «Øºc¤l
-    Polynomial Add(Polynomial b); // ¦h¶µ¦¡¬Û¥[
-    void newTerm(float coef, int exp); // ·s¼W¶µ
+    Polynomial();                // å»ºæ§‹å­
+    Polynomial Add(Polynomial b); // å¤šé …å¼ç›¸åŠ 
+    void newTerm(float coef, int exp); // æ–°å¢é …
 };
 
-//------------------ «Øºc¤l ------------------
+//------------------ å»ºæ§‹å­ ------------------
 Polynomial::Polynomial() {
     capacity = 10;
     terms = 0;
     termsArray = new Term[capacity];
 }
 
-//------------------ ·s¼W·s¶µ ------------------
+//------------------ æ–°å¢æ–°é … ------------------
 void Polynomial::newTerm(float coef, int exp) {
-    if (terms == capacity) { // ­Y®e¶q¤£¨¬¡A¦Û°ÊÂX¤j
+    if (terms == capacity) { // è‹¥å®¹é‡ä¸è¶³ï¼Œè‡ªå‹•æ“´å¤§
         capacity *= 2;
         Term* temp = new Term[capacity];
         for (int i = 0; i < terms; i++) temp[i] = termsArray[i];
@@ -47,7 +47,7 @@ void Polynomial::newTerm(float coef, int exp) {
     terms++;
 }
 
-//------------------ ¥[ªk ------------------
+//------------------ åŠ æ³• ------------------
 Polynomial Polynomial::Add(Polynomial b) {
     Polynomial c;
     int aPos = 0, bPos = 0;
@@ -68,7 +68,7 @@ Polynomial Polynomial::Add(Polynomial b) {
         }
     }
 
-    // ³Ñ¤Uªº¶µª½±µ¥[¤J
+    // å‰©ä¸‹çš„é …ç›´æ¥åŠ å…¥
     for (; aPos < terms; aPos++)
         c.newTerm(termsArray[aPos].coef, termsArray[aPos].exp);
     for (; bPos < b.terms; bPos++)
@@ -77,10 +77,10 @@ Polynomial Polynomial::Add(Polynomial b) {
     return c;
 }
 
-//------------------ ¿é¤J¹Bºâ¤l >> ------------------
+//------------------ è¼¸å…¥é‹ç®—å­ >> ------------------
 istream& operator>>(istream& is, Polynomial& p) {
     int n;
-    is >> n; // Åª¨ú n (¦³´X¶µ)
+    is >> n; // è®€å– n (æœ‰å¹¾é …)
     for (int i = 0; i < n; i++) {
         float coef;
         int exp;
@@ -90,9 +90,9 @@ istream& operator>>(istream& is, Polynomial& p) {
     return is;
 }
 
-//------------------ ¿é¥X¹Bºâ¤l << ------------------
+//------------------ è¼¸å‡ºé‹ç®—å­ << ------------------
 ostream& operator<<(ostream& os, const Polynomial& p) {
-    if (p.terms == 0) {  // ¨S¦³¥ô¦ó¶µ ¡÷ ¿é¥X 0
+    if (p.terms == 0) {  // æ²’æœ‰ä»»ä½•é … â†’ è¼¸å‡º 0
         os << 0;
         return os;
     }
@@ -100,34 +100,34 @@ ostream& operator<<(ostream& os, const Polynomial& p) {
         float coef = p.termsArray[i].coef;
         int exp = p.termsArray[i].exp;
 
-        // ¿é¥X«Y¼Æ
+        // è¼¸å‡ºä¿‚æ•¸
         if (exp == 0) {
-            os << coef;  // ±`¼Æ¶µ
+            os << coef;  // å¸¸æ•¸é …
         }
         else if (exp == 1) {
-            os << coef << "x";  // ¤@¦¸¶µ¤£Åã¥Ü ^1
+            os << coef << "x";  // ä¸€æ¬¡é …ä¸é¡¯ç¤º ^1
         }
         else {
             os << coef << "x^" << exp;
         }
 
-        // ¶µ»P¶µ¤§¶¡¥[ "+"
+        // é …èˆ‡é …ä¹‹é–“åŠ  "+"
         if (i != p.terms - 1) os << "+";
     }
 
-    // ÃB¥~¿é¥X´«¦æ¡A·Ó§Aªº½d¨Ò
+    // é¡å¤–è¼¸å‡ºæ›è¡Œï¼Œç…§ä½ çš„ç¯„ä¾‹
 
     return os;
 }
 
-//------------------ ¥Dµ{¦¡ ------------------
+//------------------ ä¸»ç¨‹å¼ ------------------
 int main() {
     int m, n;
     while (cin >> m >> n) {
-        if (m == 0 && n == 0) break; // ¥i¦Û¦æ¨M©wµ²§ô±ø¥ó
+        if (m == 0 && n == 0) break; // å¯è‡ªè¡Œæ±ºå®šçµæŸæ¢ä»¶
         Polynomial A, B, C;
 
-        // Åª¤J A¡BB
+        // è®€å…¥ Aã€B
         for (int i = 0; i < m; i++) {
             float coef; int exp;
             cin >> coef >> exp;
@@ -144,3 +144,4 @@ int main() {
     }
     return 0;
 }
+
