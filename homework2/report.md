@@ -201,3 +201,4 @@ $ ./polynomial
     for (; bPos < b.terms; bPos++)
         c.newTerm(b.termsArray[bPos].coef, b.termsArray[bPos].exp);
 ```
+3. istream 和 ostream能夠直接使用，istram能根據你多項式中項的數量n，來輸入每一項係數和指數;ostream可以根據指數來變化輸出，如果是一次方或零次方，直接輸出X無指數或是直接一個係數。
