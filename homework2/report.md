@@ -193,7 +193,7 @@ $ ./polynomial
             bPos++;
         }
 ```
-如果A或是B還有剩餘，加入新建立的多項式
+ 如果A或是B還有剩餘，加入新建立的多項式
 ```cpp
  for (; aPos < terms; aPos++)
         c.newTerm(termsArray[aPos].coef, termsArray[aPos].exp);
