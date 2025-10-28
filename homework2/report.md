@@ -175,8 +175,28 @@ $ ./polynomial
 
 ## 申論及開發報告
 
-### 函式Add的過程
-主要功能是對兩個多項式進行相加，把結果存放在新建立的多項式
+1. 函式Add的過程
+主要功能是對兩個多項式進行相加，把結果存放在新建立的多項式，並且比較每一項的指數，如果相同進行係數相加。
 ```cpp
-    Polynomial c;
+  while (aPos < terms && bPos < b.terms) {
+        if (termsArray[aPos].exp == b.termsArray[bPos].exp) {
+            float sum = termsArray[aPos].coef + b.termsArray[bPos].coef;
+            if (sum != 0) c.newTerm(sum, termsArray[aPos].exp);
+            aPos++; bPos++;
+        }
+        else if (termsArray[aPos].exp > b.termsArray[bPos].exp) {
+            c.newTerm(termsArray[aPos].coef, termsArray[aPos].exp);
+            aPos++;
+        }
+        else {
+            c.newTerm(b.termsArray[bPos].coef, b.termsArray[bPos].exp);
+            bPos++;
+        }
+```
+如果A或是B還有剩餘，加入新建立的多項式
+```cpp
+ for (; aPos < terms; aPos++)
+        c.newTerm(termsArray[aPos].coef, termsArray[aPos].exp);
+    for (; bPos < b.terms; bPos++)
+        c.newTerm(b.termsArray[bPos].coef, b.termsArray[bPos].exp);
 ```
