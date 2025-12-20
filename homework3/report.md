@@ -36,18 +36,23 @@ header 節點不存放實際資料，只作為串列起點與終點的判斷依�
 #ifndef CHAINNODE_H
 #define CHAINNODE_H
 
+// 節點
 template <class T>
 class ChainNode {
 public:
-    T element;
-    ChainNode<T>* link;
+    T element;              
+    ChainNode<T>* link;     // 指向下一個節點的指標
 
-    ChainNode(const T& e = T(), ChainNode<T>* l = nullptr)
-        : element(e), link(l) {}
+    // 建構子
+    ChainNode(const T& e = T(), ChainNode<T>* l = nullptr) {
+        element = e;       
+        link = l;           // 將傳入的指標存到 link
+    }
 };
 
 #endif
 ```
+ChainNode提供單向鏈結串列節點模板，可用於任何的型態資料，並能方便地建立串列結構。
 
 ## 效能分析
 
