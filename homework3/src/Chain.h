@@ -15,7 +15,7 @@ protected:
 public:
     Chain() {
         header = new ChainNode<T>();
-        header->link = header;   // Àôª¬
+        header->link = header;   // Ã€Ã´ÂªÂ¬
     }
 
     ~Chain() {
@@ -58,3 +58,4 @@ public:
 };
 
 #endif
+
