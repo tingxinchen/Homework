@@ -4,8 +4,8 @@
 
 ## 解題說明
 
-作業環狀鏈結串列
-來實作多項式的運算，並且能照指數由大到小排好。
+作業環狀鏈結串列，完成多項式的建立、輸入輸出與運算，
+做出多項式的運算，並且能照指數由大到小排好。
 
 每一個多項式項目包含三個：
 - `coef`：係數
@@ -25,12 +25,29 @@ header 節點不存放實際資料，只作為串列起點與終點的判斷依�
 
 ### Chain 與 ChainIterator 的設計
 1. 使用 `Chain<T>` 來管理環狀鏈結串列。
-2. 透過 `ChainIterator<T>`，讓串列可以使用類似陣列的方式遍歷：
+2. 透過 `ChainIterator<T>`，讓串列可以使用陣列的方式運作：
    ```cpp
    for (auto it = poly.Begin(); it != poly.End(); ++it)
-3.iterator 內部僅保存目前節點的指標，透過 operator overloading 進行存取與移動。
+3.iterator 保存目前節點的指標，進行存取與移動。
 
 ## 程式實作
+`ChainNode.h`
+```cpp
+#ifndef CHAINNODE_H
+#define CHAINNODE_H
+
+template <class T>
+class ChainNode {
+public:
+    T element;
+    ChainNode<T>* link;
+
+    ChainNode(const T& e = T(), ChainNode<T>* l = nullptr)
+        : element(e), link(l) {}
+};
+
+#endif
+```
 
 ## 效能分析
 
